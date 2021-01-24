@@ -1,0 +1,15 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  # Build
+  Build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v2
+      - name: Fetch all tags and branches
+        run: git fetch --prune --unshallow
+      - name: Build
+        run: .\build.ps1 --verbosity=diagnostic
+        shell: powershell
